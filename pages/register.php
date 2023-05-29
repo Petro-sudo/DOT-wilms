@@ -1,6 +1,3 @@
-
-<!-- Navigation -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,20 +5,24 @@
   <title>Log book</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <div style="text-align:left">
-    <div class="">
-      <h1 style="background-color:#182C39; color:white; text-align:center">WELCOME TO THE DEPARTMENT OF TRANSPORT!!!
-      </h1>
-      <p style="color:#182C39; font-size:18px;text-align:center;"></p>
+  <div class="header">
+    <div class="header-left">
+      <img src="image/dotleft.jpg" alt="Cinque Terre" width="170" height="110">
     </div>
+    <div class="header-right">
+      <img src="image/ndpright.png" alt="Cinque Terre" width="120" height="120">
+    </div>
+  </div>
+  <h1>INTERNS’ MENTORS REPORTING SYSTEM</h1>
 </head>
 
+
 <body class="body">
-  <!-- Page Content -->
+  <!-- Page Conten -->
   <!-- <div class="container jumbotron" style="width: 45%; border-radius: 15px"> -->
 
   <div class="container">
@@ -29,7 +30,7 @@
       <div class="col-lg-6">
 
 
-        <h2 style="margin-left: 40%;">Registration</h2>
+        <h2>Sign Up</h2>
         <form action="" method="POST" enctype="multipart/form-data">
 
           <div class="form-group">
@@ -48,7 +49,7 @@
           </div>
           <br>
           <div class="form-group">
-            <label for="perselNo">Persel Number (Mentor)</label><br>
+            <label for="perselNo">Persel Number</label><br>
             <input type="text" class="form-control" id="perselNo" placeholder="Mentor Persel Number" name="perselNo">
           </div>
           <br>
@@ -67,7 +68,6 @@
             <select class="form-control" name="role">
               <option value="">Select Role</option>
               <option value="Intern">Intern</option>
-              <option value="Mentor">Mentor</option>
               <option value="HR">HR</option>
             </select>
           </div>
@@ -83,23 +83,24 @@
           </div>
           <br>
           <div class="form-group">
-            <p>Already have account ?<a href="login.php"> Login</a></p>
+            <p>Already have account ?<a href="login.php"> Sign In</a></p>
             <button type="submit" class="btn btn-primary" name="register"
-              style="margin-left: 45%; margin-top: 20px;">Register</button>
+              style="margin-left: 45%; margin-top: 20px;">Sign Up</button>
           </div>
         </form>
-
-
       </div>
     </div>
-
   </div>
-
 </body>
+<div class="header">
+  <div class="header-left">
+    <img src="image/footer.png" alt="Cinque Terre" width="160%" height="110">
+  </div>
+</div>
 
 </html>
 <?php
-include "database.php"; 
+include "db/database.php";
 
 if (isset($_POST['register'])) {
   //echo "registered";

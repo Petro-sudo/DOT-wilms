@@ -6,10 +6,10 @@
   }
   // Include database connectivity
     
-  include "database.php";
+  include "db/database.php";
   
   if (isset($_POST['submit'])) {     
-     $errorMsg = ""; 
+     $errorMsg = "Username or password is incorrect"; 
      $email = $_POST['email'];
      $pwd = $_POST['pwd'];
       
@@ -33,19 +33,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Log book</title>
+  <title>Log book</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <div style="text-align:left">
-    <div class="">
-      <h1 style="background-color:#182C39; color:white; text-align:center">WELCOME TO THE DEPARTMENT OF TRANSPORT!!!
-      </h1>
-      <p style="color:#182C39; font-size:18px;text-align:center;"></p>
+  <div class="header">
+    <div class="header-left">
+      <img src="image/dotleft.jpg" alt="Cinque Terre" width="170" height="110">
     </div>
+    <div class="header-right">
+      <img src="image/ndpright.png" alt="Cinque Terre" width="120" height="120">
+    </div>
+  </div>
+  <h1>INTERNS’ MENTORS REPORTING SYSTEM</h1>
 </head>
 <body><div class="card text-center" style="padding:20px;">
   <h3>Sign In</h3>
@@ -62,11 +65,11 @@
         <form action="" method="POST">
           <div class="form-group">  
             <label for="email">Username:</label> 
-            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" >
+            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required >
           </div>
           <div class="form-group">  
             <label for="pwd">Password:</label> 
-            <input type="password" class="form-control" name="pwd" placeholder="Enter Password">
+            <input type="password" class="form-control" name="pwd" placeholder="Enter Password" registered>
           </div>
           <div class="form-group">
             <p>Not registered yet ?<a href="register.php"> Register here</a></p>
@@ -77,6 +80,11 @@
   </div>
 </div>
 </body>
+<div class="header">
+  <div class="header-left">
+    <img src="image/footer.png" alt="Cinque Terre" width="160%" height="110">
+  </div>
+</div>
 </html>
 
 

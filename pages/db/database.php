@@ -5,6 +5,6 @@
     $dbname = "wilms";
     $con=mysqli_connect($servername,$username,$password,"$dbname");
       if(!$con){
-          die('Could not Connect the DataBase:' .mysql_err());
+          die('Could not Connect the DataBase:'.mysql_err());
         }
 ?>

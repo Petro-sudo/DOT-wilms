@@ -43,10 +43,10 @@
             <input type="text" class="form-control" id="surname" placeholder="Enter Surname" name="surname">
           </div>
           <br>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="email">ID Number</label><br>
             <input type="text" class="form-control" id="id_number" placeholder="Enter ID Number" name="id_number">
-          </div>
+          </div> -->
           <br>
           <div class="form-group">
             <label for="perselNo">Persel Number</label><br>
@@ -57,18 +57,14 @@
             <label for="email">Email Address</label><br>
             <input type="text" class="form-control" id="email" placeholder="Enter email Address" name="email">
           </div>
-          <br>
-          <div class="form-group">
-            <label for="cellNo">Contact Number</label><br>
-            <input type="number" class="form-control" id="cellNo" placeholder="Enter Contact Numbers" name="cellNo">
-          </div>
+
           <br>
           <div class="form-group">
             <label for="role">Role:</label><br>
             <select class="form-control" name="role">
               <option value="">Select Role</option>
               <option value="Intern">Intern</option>
-              <option value="HR">HR</option>
+              <option value="Admin">Admin</option>
             </select>
           </div>
           <br>
@@ -106,10 +102,8 @@ if (isset($_POST['register'])) {
   //echo "registered";
   $name = $_POST['name'];
   $surname = $_POST['surname'];
-  $id_number = $_POST['id_number'];
   $perselNo = $_POST['perselNo'];
   $email = $_POST['email'];
-  $cellNo = $_POST['cellNo'];
   $role = $_POST['role'];
   $pwd = $_POST['pwd'];
   $cpwd = $_POST['cpwd'];
@@ -130,15 +124,12 @@ if (isset($_POST['register'])) {
   $symbolPassword = "/(?=.*?[#?!@$%^&*-])/";
   $minEightPassword = "/.{8,}/";
 
-  if ($name == "" || $surname == "" || $id_number == "" || $email == "" || $cellNo == "" || $role == "" || $pwd == "" || $cpwd == "") {
-    # code...
-    echo "**ALL FIELDS MANDATORY";
-  } elseif (strlen($cellNo) != 10) {
-    # code...
-    echo "**PhoneNo Must Contain Of 10 bits";
-  } elseif (strlen($id_number) != 13) {
-    # code...
-    echo "**ID Number Must Contain Of 13 bits";
+  if ($name == "" || $surname == "" || $perselNo == "" || $email == "" || $role == "" || $pwd == "" || $cpwd == "") {
+
+    echo "* ALL FIELDS MANDATORY **";
+
+  } elseif ($perselNo != 8) {
+    echo "Persal Number must contain 8 numbers";
   } elseif (!preg_match($validEmail, $email)) {
     echo "Invalid Email Address";
   } elseif (!preg_match($uppercasePassword, $pwd) || !preg_match($lowercasePassword, $pwd) || !preg_match($digitPassword, $pwd) || !preg_match($symbolPassword, $pwd) || !preg_match($minEightPassword, $pwd) || preg_match($spacesPassword, $pwd)) {
@@ -153,7 +144,7 @@ if (isset($_POST['register'])) {
     if (mysqli_num_rows($select)) {
       echo "This email is already being used";
     }
-    $query = "INSERT INTO register(name, surname, id_number, perselNo, email, cellNo, pwd, role) VALUES('$name', '$surname', '$id_number', '$perselNo', '$email', '$cellNo', '$pwd', '$role') ";
+    $query = "INSERT INTO register(name, surname,  perselNo, email, pwd, role) VALUES('$name', '$surname', '$perselNo', '$email',  '$pwd', '$role') ";
 
     $register_user = mysqli_query($con, $query);
 

@@ -31,14 +31,18 @@ if (!isset($_SESSION['ID'])) {
     <h1>Hi
         <?php echo ucwords($_SESSION['NAME']);
         echo " ";
-        echo ucwords($_SESSION['SURNAME']); ?>
+        echo ucwords($_SESSION['SURNAME']);
+        echo " ";
+        echo ucwords($_SESSION['ROLE']); ?>
     </h1>
     <div class="header-right">
         <a href="logout.php"> Log out</a>
     </div>
 </head>
+<br>
 
 <body>
+    <!--  intern -->
     <?php if ($_SESSION['ROLE'] == 'Intern') { ?>
         <form action="" method="POST" enctype="multipart/form-data">
             <table class="table table-hover">
@@ -53,48 +57,38 @@ if (!isset($_SESSION['ID'])) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
-                                class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description"
-                                name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
-                                class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description"
-                                name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
-                                class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description"
-                                name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
-                                class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description"
-                                name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
-                                class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description"
-                                name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -111,20 +105,66 @@ if (!isset($_SESSION['ID'])) {
                 </div>
             </div>
             <br>
-            <!-- <input type="save" id="button1" value="Save" />
-            <input type="submit" id="button2" value="Submit" /> -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="intern" style="margin-left: 45%; margin-top: 20px;">Send
+            </div>
+        </form>
+    <?php } ?>
+    <!-- admin -->
+    <?php if ($_SESSION['ROLE'] == 'Admin') { ?>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <table class="table table-hover">
+                <thead>
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-primary btn-block" click="admin-intern.php">INTERNS’ <?php echo date("Y"); ?></button>
+                        <button type="button" class="btn btn-primary btn-block">Mentors <?php echo date("Y"); ?></button>
+                        <button type="button" class="btn btn-primary btn-block">Admin <?php echo date("Y"); ?></button>
+                    </div>
+
+                    <?php
+                    include "db/database.php";
+                    // Check connection
+                    if (mysqli_connect_errno()) {
+                        echo "Failed to connect to Data Base: " . mysqli_connect_error();
+                    }
+                    if (isset($_POST['register'])) {
+                        $result = mysqli_query($con, "SELECT 'name', 'surname',  From 'register' ");
+                        echo "<p><strong>Question:</strong></p>";
+
+                        while ($row = mysqli_fetch_array($result)) {
+
+                            echo "<p>" . $row['description'] . "</p>";
+                        }
+
+                        mysqli_close($con);
+                    }
+                    ?>
+
+
+<form method="post" action="">
+<input type="submit" name="submit" value="Get register">
+</form>
+
+                    </tbody>
+            </table>
+
+
+            </div>
+            </div>
+            </div>
+            <br>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="intern" style="margin-left: 45%; margin-top: 20px;">Send
                     Report </button>
-                    <button type="save" class="btn btn-secondary" name="intern" style="margin-right: 45%; margin-top: 20px;">Save
-                    Report </button>
+
             </div>
         </form>
     <?php } ?>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-            //feather.replace();
+        //feather.replace();
     </script>
 </body>
 <div class="header">
@@ -145,25 +185,23 @@ if (isset($_POST['intern'])) {
     $task_description = $_POST['task_description'];
     $name = $_FILES['file']['name'];
 
-    if ($startDate == "" || $hours == "" || $endDate == "" || $activity == "" || $task_description == ""|| $name == "") {
+    if ($startDate == "" || $hours == "" || $endDate == "" || $activity == "" || $task_description == "" || $name == "") {
 
         echo "**ALL FIELDS MANDATORY**";
     }
-        
+
     $targetDir = "uploads/";
-    $targetFile = $targetDir.basename($_FILES['file']['name']);
-    $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
-$extensions_arr= array("pdf","doc","docx");
-if(in_array($fileType,$extensions_arr)){
-   $query = "INSERT INTO intern(startDate,endDate, activity, task_description, hours, file) VALUES('$startDate', '$endDate', '$activity', '$task_description', '$hours', '$name')";
-   $dashboard_user = mysqli_query($con, $query);
-   if (!$dashboard_user) {
-       die("Query Failed" . mysqli_error($con));
-   }
-   move_uploaded_file($_FILES['file']['tmp_name'],$targetDir.$name);
-} else echo " file not pdf or doc ";
-
-
+    $targetFile = $targetDir . basename($_FILES['file']['name']);
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $extensions_arr = array("pdf", "doc", "docx");
+    if (in_array($fileType, $extensions_arr)) {
+        $query = "INSERT INTO intern(startDate,endDate, activity, task_description, hours, file) VALUES('$startDate', '$endDate', '$activity', '$task_description', '$hours', '$name')";
+        $dashboard_user = mysqli_query($con, $query);
+        if (!$dashboard_user) {
+            die("Query Failed" . mysqli_error($con));
+        }
+        move_uploaded_file($_FILES['file']['tmp_name'], $targetDir . $name);
+    } else echo " file not pdf or doc ";
 }
 
 ?>

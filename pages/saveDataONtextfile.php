@@ -27,3 +27,5 @@ fwrite($fp, $data);
 fclose($fp);
 }
 ?><div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
+
+msg popuo echo "<script type='text/javascript'>alert('User data updated successfully!')</script>";

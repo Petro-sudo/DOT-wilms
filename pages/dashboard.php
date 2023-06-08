@@ -57,38 +57,48 @@ if (!isset($_SESSION['ID'])) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
+                                class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description"
+                                name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
+                                class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description"
+                                name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
+                                class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description"
+                                name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
+                                class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description"
+                                name="task_description"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date" class="form-control" id="endDate" name="endDate"></input></td>
+                        <td><input type="date" class="form-control" id="startDate" name="startDate"><input type="date"
+                                class="form-control" id="endDate" name="endDate"></input></td>
                         <td><input type="number" class="form-control" id="hours" name="hours"></input></td>
                         <td><input type="text" class="form-control" id="activity" name="activity"></input></td>
-                        <td><textarea type="text" class="form-control" id="task_description" name="task_description"></textarea>
+                        <td><textarea type="text" class="form-control" id="task_description"
+                                name="task_description"></textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -116,63 +126,46 @@ if (!isset($_SESSION['ID'])) {
             <table class="table table-hover">
                 <thead>
                     <div class="d-grid gap-3">
-                        <button type="button" class="btn btn-primary btn-block" click="admin-intern.php">INTERNS’ <?php echo date("Y"); ?></button>
-                        <button type="button" class="btn btn-primary btn-block">Mentors <?php echo date("Y"); ?></button>
-                        <button type="button" class="btn btn-primary btn-block">Admin <?php echo date("Y"); ?></button>
+                        <button type="button" id="internButton" class="btn btn-primary btn-block">Interns’
+                            <?php echo date("Y"); ?>
+                        </button>
+                        <script type="text/javascript">
+                            document.getElementById("internButton").onclick = function () {
+                                location.href = "admin-intern.php";
+                            };
+                        </script>
+
+                        <button type="button" id="mentorButton" class="btn btn-secondary btn-block">Mentors
+                            <?php echo date("Y"); ?>
+                        </button>
+                        <script type="text/javascript">
+                            document.getElementById("mentorButton").onclick = function () {
+                                location.href = "admin-mentor.php";
+                            };
+                        </script>
+                        <button type="button" id="adminButton" class="btn btn-danger btn-block">Admin
+                            <?php echo date("Y"); ?>
+                        </button>
+                        <script type="text/javascript">
+                            document.getElementById("adminButton").onclick = function () {
+                                location.href = "admin-admin.php";
+                            };
+                        </script>
                     </div>
-
-                    <?php
-                    include "db/database.php";
-                    // Check connection
-                    if (mysqli_connect_errno()) {
-                        echo "Failed to connect to Data Base: " . mysqli_connect_error();
-                    }
-                    if (isset($_POST['register'])) {
-                        $result = mysqli_query($con, "SELECT 'name', 'surname',  From 'register' ");
-                        echo "<p><strong>Question:</strong></p>";
-
-                        while ($row = mysqli_fetch_array($result)) {
-
-                            echo "<p>" . $row['description'] . "</p>";
-                        }
-
-                        mysqli_close($con);
-                    }
-                    ?>
-
-
-<form method="post" action="">
-<input type="submit" name="submit" value="Get register">
-</form>
-
-                    </tbody>
             </table>
-
-
-            </div>
-            </div>
-            </div>
-            <br>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="intern" style="margin-left: 45%; margin-top: 20px;">Send
-                    Report </button>
-
-            </div>
         </form>
     <?php } ?>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        //feather.replace();
     </script>
 </body>
+<br><br>
 <div class="header">
     <div class="header-left">
         <img src="image/footer.png" alt="Cinque Terre" width="160%" height="110">
     </div>
 </div>
-
 </html>
 <?php
 include "db/database.php";
@@ -201,7 +194,8 @@ if (isset($_POST['intern'])) {
             die("Query Failed" . mysqli_error($con));
         }
         move_uploaded_file($_FILES['file']['tmp_name'], $targetDir . $name);
-    } else echo " file not pdf or doc ";
+    } else
+        echo " file not pdf or doc ";
 }
 
 ?>

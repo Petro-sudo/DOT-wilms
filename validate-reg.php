@@ -67,7 +67,12 @@ if($fnameErr==1 && $lnameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 }
 
 }
-
+//validate phone number
+if(preg_match('/^[0-9]{10}+$/', $phone)) {
+  echo "Valid Phone Number";
+  } else {
+  echo "Invalid Phone Number";
+  }
 
 // convert illegal input value to ligal value formate
 function legal_input($value) {

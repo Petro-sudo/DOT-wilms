@@ -17,55 +17,55 @@
       <img src="image/ndpright.png" alt="Cinque Terre" width="120" height="120">
     </div>
   </div>
-  <h1><?php echo date("Y"); ?> INTERNS’ </h1>
+  <h1>
+    <?php echo date("Y"); ?> INTERNS’
+  </h1>
+  <div>
+    <div class="header-right">
+      <a href="logout.php"> Log out</a>
+    </div>
+    <div class="header-left">
+      <a href="dashboard.php"> Back</a>
+    </div>
+  </div>
 </head>
 
 
 <body class="body">
-<div class="ibox-content">
-                        <table class="table table-striped table-bordered table-hover dataTables-example" >
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Persal Number</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-include "db/database.php";
+  <div class="ibox-content">
+    <table class="table table-striped table-bordered table-hover dataTables-example">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Persal Number</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        include "db/database.php";
 
-$query = 'SELECT name,surname,perselNo,email FROM register where role = "Intern"';
-$data = mysqli_query($con, $query);
+        $query = 'SELECT name,surname,perselNo,email FROM register where role = "Intern"';
+        $data = mysqli_query($con, $query);
 
 
-                    while($row = mysqli_fetch_array($data)) 
-                    {
-                        echo "  <tr>
+        while ($row = mysqli_fetch_array($data)) {
+          echo "  <tr>
                             <td>" . $row['name'] . "</td>
                             <td>" . $row['surname'] . "</td>
                             <td>" . $row['perselNo'] . "</td>
                             <td>" . $row['email'] . "</td>
-                             
-
-                                </tr>";
-                    }
-
-                    ?>
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
-                    </div>
-            </div>
-            </div>
+                  </tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
 </body>
 <div class="header">
   <div class="header-left">
     <img src="image/footer.png" alt="Cinque Terre" width="160%" height="110">
   </div>
 </div>
-
 </html>
-<?php

@@ -20,11 +20,57 @@
   <h1>INTERNS’ MENTORS REPORTING SYSTEM</h1>
 </head>
 
+<?php
+include "db/database.php";
+
+if (isset($_POST['register'])) {
+  $name = $_POST['name'];
+  $surname = $_POST['surname'];
+  $perselNo = $_POST['perselNo'];
+  $email = $_POST['email'];
+  $role = $_POST['role'];
+  $pwd = $_POST['pwd'];
+  $cpwd = $_POST['cpwd'];
+  $validEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+  $uppercasePassword = "/(?=.*?[A-Z])/";
+  $lowercasePassword = "/(?=.*?[a-z])/";
+  $digitPassword = "/(?=.*?[0-9])/";
+  $spacesPassword = "/^$|\s+/";
+  $symbolPassword = "/(?=.*?[#?!@$%^&*-])/";
+  $minEightPassword = "/.{8,}/";
+
+  if ($name == "" || $surname == "" || $perselNo == "" || $email == "" || $role == "" || $pwd == "" || $cpwd == "") {
+
+    echo '<i style="color:red;">ALL FIELDS MANDATORY </i>';
+
+  } elseif (!preg_match('/^[0-9]{8}+$/', $perselNo)) {
+    echo '<i style="color:red;">Persal Number must contain 8 numbers</i>';
+  } elseif (!preg_match($validEmail, $email)) {
+    echo '<i style="color:red;">Invalid Email Address</i>';
+  } elseif (!preg_match($uppercasePassword, $pwd) || !preg_match($lowercasePassword, $pwd) || !preg_match($digitPassword, $pwd) || !preg_match($symbolPassword, $pwd) || !preg_match($minEightPassword, $pwd) || preg_match($spacesPassword, $pwd)) {
+    echo " *Password must be at least one uppercase letter";
+    echo " *Lowercase letter";
+    echo " *Digit, a special character with no spaces";
+    echo " *Minimum 8 of length";
+  } elseif ($cpwd != $pwd) {
+    echo '<i style="color:red;">Confirm Password doest Matched</i>';
+  } else {
+    $select = mysqli_query($con, "SELECT `email` FROM `register` WHERE `email` = '" . $_POST['email'] . "'");
+    if (mysqli_num_rows($select)) {
+      echo '<i style="color:red;">This email is already being used</i>';
+    }
+    $query = "INSERT INTO register(name, surname,  perselNo, email, pwd, role) VALUES('$name', '$surname', '$perselNo', '$email',  '$pwd', '$role') ";
+
+    $register_user = mysqli_query($con, $query);
+
+    if (!$register_user) {
+      die("Query Failed" . mysqli_error($con));
+    }
+  }
+}
+?>
 
 <body class="body">
-  <!-- Page Conten -->
-  <!-- <div class="container jumbotron" style="width: 45%; border-radius: 15px"> -->
-
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
@@ -32,7 +78,6 @@
 
         <h2>Sign Up</h2>
         <form action="" method="POST" enctype="multipart/form-data">
-
           <div class="form-group">
             <label for="name">Name</label><br>
             <input type="text" class="form-control" id="name" placeholder="Enter Username" name="name">
@@ -57,7 +102,8 @@
             <label for="email">Email Address</label><br>
             <input type="text" class="form-control" id="email" placeholder="Enter email Address" name="email">
           </div>
-
+          <small id="emailHelp" class="form-text text-muted">Do not share your email with anyone
+                            else.</small>
           <br>
           <div class="form-group">
             <label for="role">Role:</label><br>
@@ -95,66 +141,3 @@
 </div>
 
 </html>
-<?php
-include "db/database.php";
-
-if (isset($_POST['register'])) {
-  //echo "registered";
-  $name = $_POST['name'];
-  $surname = $_POST['surname'];
-  $perselNo = $_POST['perselNo'];
-  $email = $_POST['email'];
-  $role = $_POST['role'];
-  $pwd = $_POST['pwd'];
-  $cpwd = $_POST['cpwd'];
-  //upload an image
-  // $image = $_FILES['image']['name'];
-  // $tmp_image = $_FILES['image']['tmp_name'];
-
-  // move_uploaded_file($tmp_image, "images/$image");
-  // if ($image == "") {
-  //   $image = "user_default.jpg";
-  // }
-  $validName = "/^[a-zA-Z ]*$/";
-  $validEmail = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
-  $uppercasePassword = "/(?=.*?[A-Z])/";
-  $lowercasePassword = "/(?=.*?[a-z])/";
-  $digitPassword = "/(?=.*?[0-9])/";
-  $spacesPassword = "/^$|\s+/";
-  $symbolPassword = "/(?=.*?[#?!@$%^&*-])/";
-  $minEightPassword = "/.{8,}/";
-
-  if ($name == "" || $surname == "" || $perselNo == "" || $email == "" || $role == "" || $pwd == "" || $cpwd == "") {
-
-    echo "* ALL FIELDS MANDATORY **";
-
-  } elseif ($perselNo != 8) {
-    echo "Persal Number must contain 8 numbers";
-  } elseif (!preg_match($validEmail, $email)) {
-    echo "Invalid Email Address";
-  } elseif (!preg_match($uppercasePassword, $pwd) || !preg_match($lowercasePassword, $pwd) || !preg_match($digitPassword, $pwd) || !preg_match($symbolPassword, $pwd) || !preg_match($minEightPassword, $pwd) || preg_match($spacesPassword, $pwd)) {
-    echo " *Password must be at least one uppercase letter";
-    echo " *Lowercase letter";
-    echo " *Digit, a special character with no spaces";
-    echo " *Minimum 8 of length";
-  } elseif ($cpwd != $pwd) {
-    echo "Confirm Password doest Matched";
-  } else {
-    $select = mysqli_query($con, "SELECT `email` FROM `register` WHERE `email` = '" . $_POST['email'] . "'");
-    if (mysqli_num_rows($select)) {
-      echo "This email is already being used";
-    }
-    $query = "INSERT INTO register(name, surname,  perselNo, email, pwd, role) VALUES('$name', '$surname', '$perselNo', '$email',  '$pwd', '$role') ";
-
-    $register_user = mysqli_query($con, $query);
-
-    if (!$register_user) {
-      die("Query Failed" . mysqli_error($con));
-    }
-
-
-  }
-
-}
-
-?>
